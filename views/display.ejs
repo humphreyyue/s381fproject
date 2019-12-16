@@ -1,0 +1,38 @@
+<html>
+    <head>
+     <link href="/css/style.css" rel="stylesheet" type="text/css">
+    </head>
+        <body>
+             <% 
+                    if( !result.borough ) 
+                    result.borough = ""; 
+                    if( !result.cuisine ) 
+                    result.cuisine = ""; 
+                    if( !result.address.coord.latitude ) 
+                    result.address.coord.latitude = ""; 
+                    if( !result.address.coord.longitude ) 
+                    result.address.longitude = ""; 
+
+                %>
+
+                <% if ( result.photo != '' ) { %>
+                <center><img src="data:<%=result.mimetype%>;base64, <%=result.photo %>" style="max-width:50%;max-height:50%;"></center>
+                <% }; %>
+            <label>Title: <%= result.name %> </label><br><hr />
+			<label>Description: <%= result.borough %> </label><br><hr />
+            <label>Make: <%= result.make %> </label><br><hr />
+            <label>Model: <%= result.model %> </label><br><hr />
+            <label>Created on: <%= result.date %> </label><br><hr />			
+
+			<label>Location:</label>
+            <form action='map' method="get">
+                    <input type='hidden' name='latitude'value='<%= result.address.coord.latitude %>'/>
+                    <input type='hidden' name='longitude'value='<%= result.address.coord.longitude %>'/>
+                    <input type="submit" value="Map"/>
+            </form>
+            <form action="/index"><input type="submit" value="Go Back"/></form>
+           
+        
+    </body>
+</html>
+
